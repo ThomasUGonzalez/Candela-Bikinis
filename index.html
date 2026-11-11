@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diosa Bikinis — Showroom Verano 2026/2027</title>
+<meta name="description" content="Showroom virtual de Diosa Bikinis. Mirá todos los modelos disponibles y pedí el tuyo por WhatsApp.">
+<meta property="og:title" content="Diosa Bikinis — Showroom Verano 2026/2027">
+<meta property="og:description" content="Elegí tus modelos favoritos y pedilos por WhatsApp.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+/* ========================================================================
+   DIOSA BIKINIS — SHOWROOM
+   Para cambiar número de WhatsApp, precios y modelos:
+   buscá el bloque "CONFIG" al final del archivo (en el <script>).
+   ======================================================================== */
+:root{
+  --ink:#24211d;
+  --ink-soft:#6b6457;
+  --sand:#c9a079;
+  --sand-deep:#a9825c;
+  --aqua:#9cc5dd;
+  --cream:#fbf8f4;
+  --paper:#fff;
+  --line:#e8e0d6;
+  --shadow:0 1px 2px rgba(36,33,29,.04),0 8px 24px -12px rgba(36,33,29,.18);
+  --radius:2px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Jost',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--cream);color:var(--ink);
+  font-weight:300;line-height:1.6;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:1240px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- aviso de configuración ---------- */
+#setupBar{display:none;background:#8c2f2f;color:#fff;font-size:12.5px;letter-spacing:.02em;
+  padding:9px 16px;text-align:center;position:relative;z-index:200}
+#setupBar.on{display:block}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:90;
+  background:rgba(251,248,244,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s;
+}
+header.stuck{border-color:var(--line);box-shadow:0 1px 20px -8px rgba(36,33,29,.18)}
+.hbar{display:flex;align-items:center;justify-content:space-between;gap:14px;height:58px}
+.hlogo{display:flex;align-items:center;gap:9px;opacity:0;transform:translateY(-4px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease);pointer-events:none}
+header.stuck .hlogo{opacity:1;transform:none;pointer-events:auto}
+.hmark{font-size:15px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;line-height:1;
+  display:inline-flex;align-items:baseline;gap:7px}
+.hmark em{font-style:normal;color:var(--sand-deep);font-size:10.5px;letter-spacing:.24em}
+.hwa{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;letter-spacing:.14em;
+  text-transform:uppercase;border:1px solid var(--ink);padding:9px 16px;border-radius:999px;
+  transition:background .25s,color .25s;white-space:nowrap}
+.hwa:hover,.hwa:focus-visible{background:var(--ink);color:var(--cream)}
+.hwa svg{width:15px;height:15px;fill:currentColor;flex:none}
+
+/* ---------- hero ---------- */
+.hero{position:relative;text-align:center;padding:52px 20px 34px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-40% 50% auto;width:120vw;height:70vh;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse at 50% 0%,rgba(156,197,221,.22),transparent 62%);
+  pointer-events:none}
+.hero-logo{width:min(252px,62vw);margin:0 auto;position:relative}
+.hero-logo img{width:100%;height:auto;mix-blend-mode:multiply}
+.hero h1{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;
+  font-size:clamp(21px,5.6vw,30px);line-height:1.25;margin-top:20px;position:relative;
+  color:var(--ink)}
+.hero .sub{font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--sand-deep);
+  margin-top:16px;position:relative;font-weight:400}
+.hero .lede{max-width:430px;margin:16px auto 0;color:var(--ink-soft);font-size:15px;position:relative}
+.rule{width:34px;height:1px;background:var(--sand);margin:26px auto 0;position:relative}
+.promopill{position:relative;display:inline-flex;align-items:center;gap:9px;margin-top:20px;
+  background:#fff;border:1px solid var(--sand);color:var(--ink);
+  font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;padding:11px 20px;border-radius:999px;
+  box-shadow:0 6px 18px -12px rgba(169,130,92,.9)}
+.promopill b{font-weight:400;color:var(--sand-deep)}
+.promopill .star{width:6px;height:6px;border-radius:50%;background:var(--sand)}
+/* promo dentro del detalle */
+.lbpromo{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:#fff;
+  border:1px solid var(--sand);color:var(--sand-deep);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;padding:8px 14px;border-radius:999px}
+/* totales en la barra */
+.traytxt .tot{display:inline;font-weight:400;color:var(--ink);font-size:12px}
+.traytxt .up{color:var(--sand-deep)}
+
+/* ---------- filtros ---------- */
+.filters{position:sticky;top:58px;z-index:80;background:rgba(251,248,244,.93);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);margin-top:30px}
+.frow{display:flex;gap:8px;overflow-x:auto;padding:13px 20px;scrollbar-width:none;
+  justify-content:flex-start;scroll-snap-type:x proximity}
+.frow::after{content:"";flex:none;width:4px}
+@media(min-width:700px){.frow{justify-content:center}}
+.frow::-webkit-scrollbar{display:none}
+.chip{flex:none;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 15px;border:1px solid var(--line);border-radius:999px;color:var(--ink-soft);
+  background:var(--paper);transition:all .25s var(--ease);scroll-snap-align:center}
+.chip:hover{border-color:var(--sand)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.chip .n{opacity:.5;margin-left:5px;font-size:10px}
+
+/* ---------- grilla ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 10px;padding:26px 0 40px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr);gap:26px 18px;padding-top:34px}}
+@media(min-width:980px){.grid{grid-template-columns:repeat(4,1fr);gap:34px 22px}}
+
+.card{position:relative;opacity:0;transform:translateY(14px);
+  transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.card.in{opacity:1;transform:none}
+.card.hide{display:none}
+.shot{position:relative;aspect-ratio:3/4;overflow:hidden;background:#efe9e2;border-radius:var(--radius)}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease),opacity .5s}
+.card:hover .shot img{transform:scale(1.045)}
+.shot button.open{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tag{position:absolute;top:9px;left:9px;background:rgba(251,248,244,.93);color:var(--ink);
+  font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;padding:5px 9px;border-radius:999px;
+  backdrop-filter:blur(6px)}
+.pick{position:absolute;top:7px;right:7px;width:34px;height:34px;border-radius:50%;
+  background:rgba(251,248,244,.9);backdrop-filter:blur(6px);display:grid;place-items:center;
+  transition:background .25s,transform .2s;z-index:2}
+.pick:hover{transform:scale(1.08)}
+.pick svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.5;transition:all .25s}
+.card.picked .pick{background:var(--ink)}
+.card.picked .pick svg{fill:var(--cream);stroke:var(--cream)}
+.meta{padding:11px 2px 0}
+.name{font-size:14.5px;letter-spacing:.03em;font-weight:400;line-height:1.3;display:flex;
+  align-items:center;gap:7px}
+.sw{flex:none;width:8px;height:8px;border-radius:50%;border:1px solid rgba(0,0,0,.14)}
+.desc{font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.4;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.price{color:var(--ink);white-space:nowrap;letter-spacing:.02em}
+.price.ask{color:var(--sand-deep)}
+.dot{opacity:.35}
+
+/* ---------- info ---------- */
+.info{border-top:1px solid var(--line);padding:46px 0 10px;margin-top:10px}
+.info h2{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
+  font-size:26px;text-align:center;margin-bottom:30px}
+.icols{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:720px){.icols{grid-template-columns:repeat(3,1fr);gap:34px}}
+.icol h3{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sand-deep);
+  margin-bottom:9px;font-weight:400}
+.icol p{font-size:14px;color:var(--ink-soft)}
+.icol p+p{margin-top:5px}
+
+footer{text-align:center;padding:48px 20px 150px;border-top:1px solid var(--line);margin-top:44px}
+footer .flogo{width:132px;margin:0 auto 18px;opacity:.9}
+footer .flogo img{width:100%;mix-blend-mode:multiply}
+.flinks{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.flink{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;border:1px solid var(--line);background:var(--paper);
+  padding:10px 17px;border-radius:999px;transition:border-color .25s,transform .2s}
+.flink:hover{border-color:var(--sand);transform:translateY(-1px)}
+.flink svg{width:14px;height:14px;fill:currentColor}
+.sig{margin-top:22px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);opacity:.65}
+
+/* ---------- barra selección ---------- */
+.tray{position:fixed;left:0;right:0;bottom:0;z-index:95;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(251,248,244,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+  transform:translateY(130%);transition:transform .45s var(--ease)}
+.tray.on{transform:none}
+.trayin{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:11px}
+.traytxt{flex:1;min-width:0}
+.traytxt>b{display:block;font-size:13.5px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.traytxt>span{font-size:12px;color:var(--ink-soft);letter-spacing:.03em;display:block;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.traybtn{flex:none;display:inline-flex;align-items:center;gap:8px;background:#1f8f5f;color:#fff;
+  padding:13px 19px;border-radius:999px;font-size:13px;letter-spacing:.08em;
+  box-shadow:0 6px 18px -8px rgba(31,143,95,.8);transition:transform .2s}
+.traybtn:active{transform:scale(.97)}
+.traybtn svg{width:17px;height:17px;fill:currentColor}
+.trayclr{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);
+  background:var(--paper);display:grid;place-items:center;transition:border-color .2s}
+.trayclr:hover{border-color:var(--sand)}
+.trayclr svg{width:14px;height:14px;fill:none;stroke:var(--ink-soft);stroke-width:1.6}
+
+/* botón flotante WA (cuando no hay selección) */
+.fab{position:fixed;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:85;
+  width:50px;height:50px;border-radius:50%;background:#1f8f5f;color:#fff;display:grid;place-items:center;
+  box-shadow:0 10px 26px -10px rgba(31,143,95,.9);transition:transform .35s var(--ease),opacity .3s}
+.fab svg{width:25px;height:25px;fill:currentColor}
+.fab.off{transform:scale(.4);opacity:0;pointer-events:none}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:120;background:rgba(36,33,29,.55);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;pointer-events:none;transition:opacity .34s var(--ease);
+  display:flex;align-items:flex-end;justify-content:center}
+.lb.on{opacity:1;pointer-events:auto}
+@media(min-width:760px){.lb{align-items:center;padding:26px}}
+.sheet{background:var(--cream);width:100%;max-width:980px;max-height:94vh;overflow-y:auto;
+  border-radius:16px 16px 0 0;transform:translateY(40px);transition:transform .4s var(--ease);
+  -webkit-overflow-scrolling:touch;position:relative}
+.lb.on .sheet{transform:none}
+@media(min-width:760px){.sheet{border-radius:4px;max-height:88vh}}
+.sheetgrid{display:grid;grid-template-columns:1fr}
+@media(min-width:760px){.sheetgrid{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}}
+.lbimg{position:relative;background:#efe9e2}
+.lbimg img{width:100%;aspect-ratio:3/4;max-height:54vh;object-fit:cover}
+@media(min-width:760px){.lbimg img{height:100%;max-height:88vh;aspect-ratio:auto}}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;
+  background:rgba(251,248,244,.86);display:grid;place-items:center;backdrop-filter:blur(6px);
+  transition:transform .2s}
+.nav:active{transform:translateY(-50%) scale(.92)}
+.nav.prev{left:10px}.nav.next{right:10px}
+.nav svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.6}
+.lbclose{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;
+  background:rgba(251,248,244,.9);display:grid;place-items:center;z-index:5;backdrop-filter:blur(6px)}
+.lbclose svg{width:15px;height:15px;stroke:var(--ink);stroke-width:1.6;fill:none}
+.lbbody{padding:24px 22px 28px;display:flex;flex-direction:column}
+@media(min-width:760px){.lbbody{padding:40px 38px;justify-content:center}}
+.lbeyebrow{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--sand-deep)}
+.lbname{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;line-height:1.1;
+  margin-top:8px;letter-spacing:.01em}
+.lbprice{font-size:17px;margin-top:12px;letter-spacing:.02em}
+.lbprice.ask{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand-deep)}
+.lbdesc{color:var(--ink-soft);font-size:14.5px;margin-top:14px}
+.lbspecs{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.lbspec{display:flex;gap:10px;font-size:13px;padding:4px 0;color:var(--ink-soft)}
+.lbspec b{font-weight:400;color:var(--ink);min-width:74px;flex:none}
+.lblabel{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);
+  margin:20px 0 9px}
+.sizes{display:flex;gap:7px;flex-wrap:wrap}
+.size{min-width:46px;text-align:center;padding:10px 13px;border:1px solid var(--line);
+  background:var(--paper);border-radius:999px;font-size:13px;transition:all .22s var(--ease)}
+.size:hover{border-color:var(--sand)}
+.size[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.lbactions{display:flex;gap:9px;margin-top:22px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 22px;
+  border-radius:999px;font-size:13.5px;letter-spacing:.06em;transition:transform .2s,background .25s,color .25s}
+.btn:active{transform:scale(.98)}
+.btn-wa{background:#1f8f5f;color:#fff;flex:1 0 100%;box-shadow:0 8px 20px -10px rgba(31,143,95,.85)}
+.btn-gh{flex:1}
+@media(min-width:760px){.btn-wa{flex:1 0 auto;min-width:190px}.btn-gh{flex:none}}
+.btn-wa svg{width:17px;height:17px;fill:currentColor}
+.btn-gh{border:1px solid var(--ink);flex:none}
+.btn-gh.active{background:var(--ink);color:var(--cream)}
+.btn-sh{border:1px solid var(--line);background:var(--paper);flex:none;width:50px;padding:15px 0}
+.btn-sh svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5}
+.toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,16px);background:var(--ink);
+  color:var(--cream);font-size:12.5px;letter-spacing:.05em;padding:11px 20px;border-radius:999px;
+  z-index:200;opacity:0;pointer-events:none;transition:all .3s var(--ease)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<symbol id="wa-line" viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.1 3.2 5 4.5.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.5-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></symbol>
+<symbol id="wa-solid" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.5 12.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.1 3.2 5 4.5.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.5-.3z"/></symbol>
+</svg>
+
+<div id="setupBar">⚠️ Falta cargar el número de WhatsApp. Abrí el archivo y completá <b>wsp</b> en el bloque CONFIG.</div>
+
+<header id="hd">
+  <div class="wrap hbar">
+    <a class="hlogo" href="#top" aria-label="Diosa Bikinis — inicio">
+      <span class="hmark">Diosa <em>Bikinis</em></span>
+    </a>
+    <span style="flex:1"></span>
+    <a class="hwa" id="hdWa" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-line"/></svg>
+      Escribinos
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-logo"><img src="fotos/logo.png" alt="Diosa Bikinis" fetchpriority="high"></div>
+    <h1>Tu verano, tu brillo.</h1>
+    <p class="sub" id="seasonLabel">Temporada 2026/2027</p>
+    <p class="lede">Modelos exclusivos, pocas unidades por talle. Elegí tus favoritos y escribinos: te reservamos el tuyo.</p>
+    <p class="promopill" id="promoPill" hidden></p>
+    <div class="rule"></div>
+  </section>
+
+  <nav class="filters" aria-label="Filtrar modelos">
+    <div class="frow" id="chips"></div>
+  </nav>
+
+  <section class="wrap">
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="wrap info">
+    <h2>Cómo comprar</h2>
+    <div class="icols">
+      <div class="icol">
+        <h3>01 · Elegí</h3>
+        <p>Tocá el corazón en los modelos que te gusten. Podés marcar todos los que quieras y mandarlos juntos en un solo mensaje.</p>
+        <p id="promoLine"></p>
+      </div>
+      <div class="icol">
+        <h3>02 · Escribinos</h3>
+        <p>Te confirmamos disponibilidad por talle y te pasamos las formas de pago.</p>
+        <p id="payLine"></p>
+      </div>
+      <div class="icol">
+        <h3>03 · Recibilo</h3>
+        <p id="shipLine"></p>
+        <p>Cambios de talle sin cargo dentro de los 7 días, con la prenda sin uso y su etiqueta.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="flogo"><img src="fotos/logo.png" alt="Diosa Bikinis"></div>
+    <div class="flinks">
+      <a class="flink" id="ftWa" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-line"/></svg>
+        WhatsApp
+      </a>
+      <a class="flink" id="ftIg" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4 1.3-.1 1.7-.1 4.8-.1zm0 3.1A6.7 6.7 0 1 0 18.7 12 6.7 6.7 0 0 0 12 5.3zm0 11A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.2a1.6 1.6 0 1 1-1.6-1.6 1.6 1.6 0 0 1 1.6 1.6z"/></svg>
+        Instagram
+      </a>
+    </div>
+    <p class="sig">Diosa Bikinis · Venado Tuerto</p>
+  </footer>
+</main>
+
+<a class="fab off" id="fab" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-solid"/></svg>
+</a>
+
+<div class="tray" id="tray">
+  <div class="trayin">
+    <div class="traytxt"><b id="trayNames">—</b><span id="trayCount"></span></div>
+    <button class="trayclr" id="trayClear" aria-label="Vaciar selección" title="Vaciar selección">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <a class="traybtn" id="trayGo" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-solid"/></svg>
+      Pedir
+    </a>
+  </div>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Detalle del modelo">
+  <div class="sheet" id="sheet">
+    <button class="lbclose" id="lbClose" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="sheetgrid">
+      <div class="lbimg">
+        <img id="lbImg" src="" alt="">
+        <button class="nav prev" id="lbPrev" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="nav next" id="lbNext" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <div class="lbbody">
+        <p class="lbeyebrow" id="lbCat"></p>
+        <h2 class="lbname" id="lbName"></h2>
+        <p class="lbprice" id="lbPrice"></p>
+        <p class="lbpromo" id="lbPromo" hidden></p>
+        <p class="lbdesc" id="lbDesc"></p>
+        <div class="lbspecs" id="lbSpecs"></div>
+        <p class="lblabel">Elegí tu talle</p>
+        <div class="sizes" id="lbSizes"></div>
+        <div class="lbactions">
+          <a class="btn btn-wa" id="lbWa" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa-solid"/></svg>
+            Lo quiero
+          </a>
+          <button class="btn btn-gh" id="lbPick">Guardar</button>
+          <button class="btn btn-sh" id="lbShare" aria-label="Compartir modelo">
+            <svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 15V3m0 0L8 7m4-4l4 4"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════
+   CONFIG — lo único que hace falta tocar
+   ════════════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  // Número de WhatsApp con código de país y SIN 0, SIN 15, sin espacios ni guiones.
+  // Ej. Venado Tuerto 3462-123456  →  "5493462123456"
+  wsp: "5493462389900",
+
+  instagram: "diosa.bikiniss",      // usuario de IG, sin @
+  temporada: "Temporada 2026/2027",
+
+  // Precio de una unidad. null = muestra "Consultar precio".
+  precio: 15000,
+
+  // Promo por cantidad: cada 'cada' unidades, el combo sale 'precio'.
+  // Con cada:2 y precio:25000 → 1=$15.000 · 2=$25.000 · 3=$40.000 · 4=$50.000
+  // Para desactivar la promo: promo: null
+  promo: { cada: 2, precio: 25000 },
+
+  envios: "Entregas en Venado Tuerto sin cargo. Al resto del país por correo.",
+  pagos: "Efectivo, transferencia y Mercado Pago en cuotas.",
+
+  talles: ["1", "2", "3", "4"],
+  moneda: "$"
+};
+
+/* ════════════════════════════════════════════════════════════════════
+   MODELOS — agregar o sacar modelos acá
+   foto: nombre del archivo dentro de la carpeta /fotos
+   ════════════════════════════════════════════════════════════════════ */
+const MODELOS = [
+  { id:"arena", nombre:"Arena", cat:"textura", etiqueta:"Más vendido",
+    color:"#a08771", colorNombre:"Nude",
+    desc:"El clásico que queda bien con todo. Triángulo corredizo y bombacha colaless con frunce atrás.",
+    tela:"Morley acanalado", corte:"Colaless regulable", detalle:"Dije dorado al centro" },
+
+  { id:"coco", nombre:"Coco", cat:"textura",
+    color:"#f2f0ec", colorNombre:"Blanco",
+    desc:"Blanco acanalado, el que mejor levanta el bronceado. Tiras regulables en top y bombacha.",
+    tela:"Morley acanalado", corte:"Colaless regulable", detalle:"Forro doble, no transparenta" },
+
+  { id:"noche", nombre:"Noche", cat:"textura",
+    color:"#1b1b1b", colorNombre:"Negro",
+    desc:"Negro texturado, el infalible. Triángulo con frunce y bombacha de tiritas largas.",
+    tela:"Morley acanalado", corte:"Colaless regulable", detalle:"Dije dorado al centro" },
+
+  { id:"onix", nombre:"Ónix", cat:"textura",
+    color:"#141414", colorNombre:"Negro ondas",
+    desc:"Negro con textura de olas en relieve y detalle de strass en la cintura. Bombacha de tiro más alto.",
+    tela:"Jacquard texturado", corte:"Tiro alto colaless", detalle:"Strass en la cintura" },
+
+  { id:"petroleo", nombre:"Petróleo", cat:"textura",
+    color:"#1f7fa6", colorNombre:"Azul petróleo",
+    desc:"Azul profundo con relieve de ondas. El color que más favorece a la piel dorada.",
+    tela:"Jacquard texturado", corte:"Colaless con moño lateral", detalle:"Tiras regulables" },
+
+  { id:"malbec", nombre:"Malbec", cat:"textura",
+    color:"#a0526b", colorNombre:"Bordó",
+    desc:"Bordó rosado con textura de ondas. Elegante sin dejar de ser verano.",
+    tela:"Jacquard texturado", corte:"Colaless con moño lateral", detalle:"Tiras regulables" },
+
+  { id:"polka-celeste", nombre:"Polka Celeste", cat:"print", etiqueta:"Nuevo",
+    color:"#a8c9e8", colorNombre:"Celeste a lunares",
+    desc:"Top con tiritas anudadas al hombro y herraje al frente. El más distinto de la colección.",
+    tela:"Lycra estampada", corte:"Top anudado al hombro", detalle:"Herraje metálico al frente" },
+
+  { id:"polka-rosa", nombre:"Polka Rosa", cat:"print", etiqueta:"Nuevo",
+    color:"#f3dde3", colorNombre:"Rosa a lunares",
+    desc:"Rosa bebé con lunares negros y herraje plateado. Romántico y retro.",
+    tela:"Lycra estampada", corte:"Triángulo con herraje", detalle:"Colaless de tiritas" },
+
+  { id:"mar", nombre:"Mar", cat:"liso",
+    color:"#1d93d2", colorNombre:"Azul",
+    desc:"Azul mar liso con dije de estrella de mar. Simple, brillante, imposible que pase desapercibido.",
+    tela:"Lycra brillante", corte:"Colaless regulable", detalle:"Dije estrella de mar" },
+
+  { id:"oliva", nombre:"Oliva", cat:"liso",
+    color:"#6d7148", colorNombre:"Verde militar",
+    desc:"Verde oliva satinado. El tono que queda bien en toda piel y no se parece al de nadie.",
+    tela:"Lycra satinada", corte:"Colaless regulable", detalle:"Herraje plateado" }
+];
+
+const CATS = [
+  { id:"all",     label:"Todos" },
+  { id:"textura", label:"Texturados" },
+  { id:"print",   label:"Estampados" },
+  { id:"liso",    label:"Lisos" }
+];
+
+/* ════════════════════════════════════════════════════════════════════
+   App
+   ════════════════════════════════════════════════════════════════════ */
+(function(){
+  "use strict";
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+  const money = n => CONFIG.moneda + n.toLocaleString('es-AR');
+  const priceTxt = () => CONFIG.precio ? money(CONFIG.precio) : "Consultar precio";
+  const hayPromo = () => !!(CONFIG.precio && CONFIG.promo && CONFIG.promo.cada > 1);
+  // 1=$15.000 · 2=$25.000 · 3=$40.000 · 4=$50.000 …
+  function total(n){
+    if(!CONFIG.precio) return 0;
+    if(!hayPromo()) return n * CONFIG.precio;
+    const c = CONFIG.promo.cada;
+    return Math.floor(n/c) * CONFIG.promo.precio + (n % c) * CONFIG.precio;
+  }
+  const ahorro = n => hayPromo() ? (n * CONFIG.precio - total(n)) : 0;
+  // cuántas faltan para completar el próximo combo
+  function faltaParaPromo(n){
+    if(!hayPromo()) return 0;
+    const r = n % CONFIG.promo.cada;
+    return r === 0 ? 0 : CONFIG.promo.cada - r;
+  }
+  const promoTxt = () => hayPromo()
+    ? `${CONFIG.promo.cada} x ${money(CONFIG.promo.precio)}` : "";
+
+  // ---- estado
+  const picked = new Map();   // id -> talle | null
+  let filtro = "all";
+  let visibles = MODELOS.slice();
+  let actual = 0;
+
+  // ---- links
+  const waOK = () => /^\d{8,15}$/.test(String(CONFIG.wsp||"").replace(/\D/g,""));
+  function waLink(texto){
+    const n = String(CONFIG.wsp||"").replace(/\D/g,"");
+    return "https://wa.me/" + n + "?text=" + encodeURIComponent(texto);
+  }
+  const saludo = "¡Hola Diosa! 🌞 Vi el showroom y me interesa:";
+
+  function setup(){
+    $('#seasonLabel').textContent = CONFIG.temporada;
+    $('#shipLine').textContent = CONFIG.envios;
+    $('#payLine').textContent = CONFIG.pagos;
+    if(hayPromo()){
+      const p = $('#promoPill');
+      p.innerHTML = `<span class="star"></span>Llevá ${CONFIG.promo.cada} y pagás <b>${money(CONFIG.promo.precio)}</b>`;
+      p.hidden = false;
+      $('#promoLine').textContent =
+        `Llevando ${CONFIG.promo.cada} pagás ${money(CONFIG.promo.precio)} en vez de ${money(CONFIG.promo.cada*CONFIG.precio)}. Podés combinar modelos y talles distintos.`;
+    }
+    $('#ftIg').href = "https://instagram.com/" + CONFIG.instagram;
+    if(!waOK()){
+      $('#setupBar').classList.add('on');
+      document.documentElement.style.setProperty('--wa-missing','1');
+    }
+    const generico = waLink("¡Hola Diosa! 🌞 Vi el showroom y quería consultarte por los modelos disponibles.");
+    ['#hdWa','#ftWa','#fab'].forEach(s => { $(s).href = waOK() ? generico : "#"; });
+  }
+
+  // ---- chips
+  function chips(){
+    const c = $('#chips');
+    c.innerHTML = CATS.map(k => {
+      const n = k.id === "all" ? MODELOS.length : MODELOS.filter(m => m.cat === k.id).length;
+      if(!n) return "";
+      return `<button class="chip" data-cat="${k.id}" aria-pressed="${k.id===filtro}">${k.label}<span class="n">${n}</span></button>`;
+    }).join("");
+    c.addEventListener('click', e => {
+      const b = e.target.closest('.chip'); if(!b) return;
+      filtro = b.dataset.cat;
+      $$('.chip').forEach(x => x.setAttribute('aria-pressed', x.dataset.cat === filtro));
+      aplicarFiltro();
+    });
+  }
+
+  function aplicarFiltro(){
+    visibles = filtro === "all" ? MODELOS.slice() : MODELOS.filter(m => m.cat === filtro);
+    MODELOS.forEach(m => {
+      const el = document.getElementById('card-' + m.id);
+      if(el) el.classList.toggle('hide', !visibles.includes(m));
+    });
+  }
+
+  // ---- grilla
+  function grilla(){
+    $('#grid').innerHTML = MODELOS.map((m,i) => `
+      <article class="card" id="card-${m.id}" data-id="${m.id}">
+        <div class="shot">
+          <img src="fotos/thumb/${m.id}.jpg" alt="Bikini ${m.nombre} — ${m.colorNombre}"
+               loading="${i<4?'eager':'lazy'}" decoding="async" width="560" height="747">
+          <button class="open" data-id="${m.id}" aria-label="Ver ${m.nombre}"></button>
+          ${m.etiqueta ? `<span class="tag">${m.etiqueta}</span>` : ``}
+          <button class="pick" data-pick="${m.id}" aria-label="Guardar ${m.nombre}" aria-pressed="false">
+            <svg viewBox="0 0 24 24"><path d="M12 20.3l-1.4-1.3C5.4 14.3 2 11.3 2 7.6 2 4.6 4.4 2.2 7.4 2.2c1.7 0 3.4.8 4.6 2.1 1.2-1.3 2.9-2.1 4.6-2.1 3 0 5.4 2.4 5.4 5.4 0 3.7-3.4 6.7-8.6 11.4L12 20.3z"/></svg>
+          </button>
+        </div>
+        <div class="meta">
+          <h3 class="name"><span class="sw" style="background:${m.color}"></span>${m.nombre}</h3>
+          <p class="desc">
+            <span>${m.colorNombre}</span><span class="dot">·</span>
+            <span class="price ${CONFIG.precio?'':'ask'}">${CONFIG.precio ? money(CONFIG.precio) : 'Consultar'}</span>
+          </p>
+        </div>
+      </article>`).join("");
+
+    $('#grid').addEventListener('click', e => {
+      const p = e.target.closest('[data-pick]');
+      if(p){ toggle(p.dataset.pick); return; }
+      const o = e.target.closest('.open');
+      if(o) abrir(o.dataset.id);
+    });
+
+    const io = new IntersectionObserver(es => {
+      es.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }});
+    }, {rootMargin:"60px"});
+    $$('.card').forEach((c,i) => { c.style.transitionDelay = Math.min(i,8)*40 + 'ms'; io.observe(c); });
+  }
+
+  // ---- selección
+  function toggle(id, talle){
+    if(picked.has(id)) picked.delete(id);
+    else picked.set(id, talle || null);
+    pintar();
+    const m = MODELOS.find(x => x.id === id);
+    msg(picked.has(id) ? `${m.nombre} guardado` : `${m.nombre} quitado`);
+  }
+  function pintar(){
+    MODELOS.forEach(m => {
+      const c = document.getElementById('card-' + m.id);
+      if(!c) return;
+      const on = picked.has(m.id);
+      c.classList.toggle('picked', on);
+      const b = c.querySelector('.pick');
+      if(b) b.setAttribute('aria-pressed', on);
+    });
+    const n = picked.size;
+    $('#tray').classList.toggle('on', n > 0);
+    $('#fab').classList.toggle('off', n > 0);
+    if(n){
+      const nombres = Array.from(picked.keys()).map(id => MODELOS.find(m => m.id === id).nombre);
+      $('#trayNames').textContent = nombres.join(' · ');
+      const sub = $('#trayCount');
+      if(CONFIG.precio){
+        const falta = faltaParaPromo(n);
+        if(falta > 0){
+          sub.innerHTML = `<b class="tot">${money(total(n))}</b> · <span class="up">+${falta} y pagás ${money(total(n+falta))}</span>`;
+        }else{
+          sub.innerHTML = `<b class="tot">${money(total(n))}</b>${ahorro(n)?` · <span class="up">ahorrás ${money(ahorro(n))}</span>`:''}`;
+        }
+      }else{
+        sub.textContent = n === 1 ? '1 modelo guardado' : n + ' modelos guardados';
+      }
+      $('#trayGo').href = waOK() ? waLink(armarPedido()) : "#";
+    }
+    const lb = $('#lb');
+    if(lb.classList.contains('on')){
+      const m = visibles[actual];
+      const on = picked.has(m.id);
+      $('#lbPick').classList.toggle('active', on);
+      $('#lbPick').textContent = on ? 'Guardado ✓' : 'Guardar';
+    }
+  }
+  function armarPedido(){
+    const lineas = Array.from(picked.entries()).map(([id,t]) => {
+      const m = MODELOS.find(x => x.id === id);
+      return "• " + m.nombre + " (" + m.colorNombre + ")" + (t ? " – Talle " + t : "");
+    });
+    const n = picked.size;
+    const tot = CONFIG.precio ? "\nTotal: " + money(total(n)) + (ahorro(n) ? " (promo " + CONFIG.promo.cada + " x " + money(CONFIG.promo.precio) + ")" : "") : "";
+    return saludo + "\n" + lineas.join("\n") + tot + "\n\n¿Me confirmás disponibilidad? 💛";
+  }
+
+  // ---- lightbox
+  function abrir(id){
+    actual = visibles.findIndex(m => m.id === id);
+    if(actual < 0){ filtro = "all"; $$('.chip').forEach(x => x.setAttribute('aria-pressed', x.dataset.cat === 'all')); aplicarFiltro(); actual = visibles.findIndex(m => m.id === id); }
+    render();
+    $('#lb').classList.add('on');
+    document.body.style.overflow = 'hidden';
+    history.replaceState(null,'','#' + id);
+  }
+  function cerrar(){
+    $('#lb').classList.remove('on');
+    document.body.style.overflow = '';
+    history.replaceState(null,'',location.pathname);
+  }
+  function mover(d){
+    actual = (actual + d + visibles.length) % visibles.length;
+    render();
+    history.replaceState(null,'','#' + visibles[actual].id);
+  }
+  let talleSel = null;
+  function render(){
+    const m = visibles[actual];
+    talleSel = picked.get(m.id) || null;
+    $('#lbImg').src = 'fotos/' + m.id + '.jpg';
+    $('#lbImg').alt = 'Bikini ' + m.nombre + ' — ' + m.colorNombre;
+    $('#lbCat').textContent = m.colorNombre;
+    $('#lbName').textContent = m.nombre;
+    const p = $('#lbPrice');
+    p.textContent = priceTxt();
+    p.className = 'lbprice' + (CONFIG.precio ? '' : ' ask');
+    const pr = $('#lbPromo');
+    if(hayPromo()){ pr.textContent = `Llevando ${CONFIG.promo.cada}: ${money(CONFIG.promo.precio)}`; pr.hidden = false; }
+    $('#lbDesc').textContent = m.desc;
+    $('#lbSpecs').innerHTML = [
+      ['Tela', m.tela], ['Corte', m.corte], ['Detalle', m.detalle],
+      ['Talles', CONFIG.talles.join(' · ')]
+    ].map(([k,v]) => `<p class="lbspec"><b>${k}</b><span>${v}</span></p>`).join("");
+    $('#lbSizes').innerHTML = CONFIG.talles.map(t =>
+      `<button class="size" data-size="${t}" aria-pressed="${t===talleSel}">${t}</button>`).join("");
+    const on = picked.has(m.id);
+    $('#lbPick').classList.toggle('active', on);
+    $('#lbPick').textContent = on ? 'Guardado ✓' : 'Guardar';
+    linkIndividual();
+    const multi = visibles.length > 1;
+    $('#lbPrev').style.display = multi ? '' : 'none';
+    $('#lbNext').style.display = multi ? '' : 'none';
+    const sig = visibles[(actual+1) % visibles.length];
+    if(sig) new Image().src = 'fotos/' + sig.id + '.jpg';
+  }
+  function linkIndividual(){
+    const m = visibles[actual];
+    const t = talleSel ? " en talle " + talleSel : "";
+    const txt = saludo + "\n• " + m.nombre + " (" + m.colorNombre + ")" + t + "\n\n¿Lo tenés disponible? 💛";
+    $('#lbWa').href = waOK() ? waLink(txt) : "#";
+  }
+
+  $('#lbSizes').addEventListener('click', e => {
+    const b = e.target.closest('.size'); if(!b) return;
+    talleSel = (talleSel === b.dataset.size) ? null : b.dataset.size;
+    $$('#lbSizes .size').forEach(x => x.setAttribute('aria-pressed', x.dataset.size === talleSel));
+    if(picked.has(visibles[actual].id)) picked.set(visibles[actual].id, talleSel);
+    linkIndividual(); pintar();
+  });
+  $('#lbPick').addEventListener('click', () => toggle(visibles[actual].id, talleSel));
+  $('#lbShare').addEventListener('click', async () => {
+    const m = visibles[actual];
+    const url = location.origin + location.pathname + '#' + m.id;
+    const data = { title:'Diosa Bikinis — ' + m.nombre, text:'Mirá este modelo de Diosa Bikinis: ' + m.nombre, url };
+    try{
+      if(navigator.share){ await navigator.share(data); }
+      else { await navigator.clipboard.writeText(url); msg('Link copiado'); }
+    }catch(err){ /* cancelado */ }
+  });
+  $('#lbPrev').addEventListener('click', () => mover(-1));
+  $('#lbNext').addEventListener('click', () => mover(1));
+  $('#lbClose').addEventListener('click', cerrar);
+  $('#lb').addEventListener('click', e => { if(e.target.id === 'lb') cerrar(); });
+  document.addEventListener('keydown', e => {
+    if(!$('#lb').classList.contains('on')) return;
+    if(e.key === 'Escape') cerrar();
+    if(e.key === 'ArrowLeft') mover(-1);
+    if(e.key === 'ArrowRight') mover(1);
+  });
+  // swipe
+  let x0 = null, y0 = null;
+  $('#lbImg').addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, {passive:true});
+  $('#lbImg').addEventListener('touchend', e => {
+    if(x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) mover(dx < 0 ? 1 : -1);
+    x0 = null;
+  }, {passive:true});
+
+  // ---- tray
+  $('#trayClear').addEventListener('click', () => { picked.clear(); pintar(); msg('Selección vaciada'); });
+  ['#trayGo','#lbWa','#hdWa','#ftWa','#fab'].forEach(s => {
+    $(s).addEventListener('click', e => {
+      if(!waOK()){ e.preventDefault(); msg('Falta cargar el número de WhatsApp'); }
+    });
+  });
+
+  // ---- misc
+  let tt;
+  function msg(t){
+    const el = $('#toast'); el.textContent = t; el.classList.add('on');
+    clearTimeout(tt); tt = setTimeout(() => el.classList.remove('on'), 1900);
+  }
+  const hd = $('#hd');
+  addEventListener('scroll', () => hd.classList.toggle('stuck', scrollY > 120), {passive:true});
+
+  // ---- init
+  setup(); chips(); grilla(); aplicarFiltro(); pintar();
+  const h = location.hash.replace('#','');
+  if(h && MODELOS.some(m => m.id === h)) setTimeout(() => abrir(h), 320);
+})();
+</script>
+</body>
+</html>

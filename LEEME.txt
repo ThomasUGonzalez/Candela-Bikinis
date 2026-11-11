@@ -1,0 +1,15 @@
+DIOSA BIKINIS - SHOWROOM
+
+Abrí index.html con el Bloc de notas (o cualquier editor) y buscá el bloque CONFIG,
+cerca del final del archivo. Ahí cambiás:
+  - wsp        -> número de WhatsApp
+  - precio     -> precio de una unidad
+  - promo      -> { cada: 2, precio: 25000 }   (poné promo: null para sacarla)
+  - instagram, envios, pagos, talles
+
+Más abajo está MODELOS: ahí se agregan, sacan o renombran los modelos.
+Cada modelo usa una foto: fotos/NOMBRE.jpg (grande) y fotos/thumb/NOMBRE.jpg (chica).
+
+Para ver los cambios: doble clic en index.html.
+Para publicarlo en internet hay que subir TODA la carpeta a un hosting
+(Netlify Drop, Vercel o GitHub Pages sirven y son gratis).
