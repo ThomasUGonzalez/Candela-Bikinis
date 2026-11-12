@@ -152,15 +152,22 @@ header.stuck .hlogo{opacity:1;transform:none;pointer-events:auto}
 .dot{opacity:.35}
 
 /* ---------- info ---------- */
-.info{border-top:1px solid var(--line);padding:46px 0 10px;margin-top:10px}
+.info{border-top:1px solid var(--line);padding:46px 20px 10px;margin-top:10px}
 .info h2{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
-  font-size:26px;text-align:center;margin-bottom:30px}
-.icols{display:grid;gap:26px;grid-template-columns:1fr}
-@media(min-width:720px){.icols{grid-template-columns:repeat(3,1fr);gap:34px}}
+  font-size:28px;text-align:center;margin-bottom:26px}
+.icols{display:grid;gap:14px;grid-template-columns:1fr;max-width:520px;margin:0 auto}
+.icol{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px}
 .icol h3{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sand-deep);
-  margin-bottom:9px;font-weight:400}
-.icol p{font-size:14px;color:var(--ink-soft)}
-.icol p+p{margin-top:5px}
+  margin-bottom:10px;font-weight:400}
+.icol p{font-size:14.5px;line-height:1.6;color:var(--ink-soft);overflow-wrap:break-word}
+.icol p+p{margin-top:8px}
+.icol p:empty{display:none}
+@media(min-width:720px){
+  .icols{grid-template-columns:repeat(3,1fr);gap:22px;max-width:none}
+  .icol{background:none;border:0;border-radius:0;padding:0}
+  .icol p{font-size:14px;line-height:1.55}
+  .icol p+p{margin-top:5px}
+}
 
 footer{text-align:center;padding:48px 20px 150px;border-top:1px solid var(--line);margin-top:44px}
 footer .flogo{width:132px;margin:0 auto 18px;opacity:.9}
