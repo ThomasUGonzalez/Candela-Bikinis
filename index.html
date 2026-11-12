@@ -531,7 +531,12 @@ const CATS = [
     const n = String(CONFIG.wsp||"").replace(/\D/g,"");
     return "https://wa.me/" + n + "?text=" + encodeURIComponent(texto);
   }
-  const saludo = "¡Hola Diosa! 🌞 Vi el showroom y me interesa:";
+  // ---- mensajes de WhatsApp (tono cercano, pocos emojis; en \u{...} para que no se rompan al guardar el archivo)
+  const EM_HOLA = "\u{1F44B}", EM_GRACIAS = "✨";   // 👋 ✨
+  const hola = "¡Hola Diosa! " + EM_HOLA + " Estuve mirando el showroom";
+  const gracias = "¡Gracias! " + EM_GRACIAS;
+  const msgGeneral = () => hola + " y quería consultarte por los modelos disponibles.\n\n" + gracias;
+  const lineaModelo = (m, t) => "• " + m.nombre + " (" + m.colorNombre + ")" + (t ? " - Talle " + t : "");
 
   function setup(){
     $('#seasonLabel').textContent = CONFIG.temporada;
@@ -549,7 +554,7 @@ const CATS = [
       $('#setupBar').classList.add('on');
       document.documentElement.style.setProperty('--wa-missing','1');
     }
-    const generico = waLink("¡Hola Diosa! 🌞 Vi el showroom y quería consultarte por los modelos disponibles.");
+    const generico = waLink(msgGeneral());
     ['#hdWa','#ftWa','#fab'].forEach(s => { $(s).href = waOK() ? generico : "#"; });
   }
 
@@ -657,13 +662,16 @@ const CATS = [
     }
   }
   function armarPedido(){
-    const lineas = Array.from(picked.entries()).map(([id,t]) => {
-      const m = MODELOS.find(x => x.id === id);
-      return "• " + m.nombre + " (" + m.colorNombre + ")" + (t ? " – Talle " + t : "");
-    });
-    const n = picked.size;
-    const tot = CONFIG.precio ? "\nTotal: " + money(total(n)) + (ahorro(n) ? " (promo " + CONFIG.promo.cada + " x " + money(CONFIG.promo.precio) + ")" : "") : "";
-    return saludo + "\n" + lineas.join("\n") + tot + "\n\n¿Me confirmás disponibilidad? 💛";
+    const items = Array.from(picked.entries()).map(([id,t]) => [MODELOS.find(x => x.id === id), t]);
+    const n = items.length;
+    const sinTalle = items.some(([, t]) => !t);
+    let txt = hola + " y me encant" + (n === 1 ? "ó este modelo" : "aron estos modelos") + ":\n\n"
+      + items.map(([m, t]) => lineaModelo(m, t)).join("\n");
+    if(CONFIG.precio){
+      txt += "\n\nTotal: " + money(total(n)) + (ahorro(n) ? " (promo " + CONFIG.promo.cada + " x " + money(CONFIG.promo.precio) + ")" : "");
+    }
+    if(sinTalle) txt += "\n\n" + (n === 1 ? "El talle te lo confirmo por acá." : "Los talles que faltan te los confirmo por acá.");
+    return txt + "\n\n¿Me confirmás si " + (n === 1 ? "lo tenés disponible?" : "los tenés disponibles?") + " " + gracias;
   }
 
   // ---- lightbox
@@ -717,8 +725,8 @@ const CATS = [
   }
   function linkIndividual(){
     const m = visibles[actual];
-    const t = talleSel ? " en talle " + talleSel : "";
-    const txt = saludo + "\n• " + m.nombre + " (" + m.colorNombre + ")" + t + "\n\n¿Lo tenés disponible? 💛";
+    const txt = hola + " y me encantó este modelo:\n\n" + lineaModelo(m, talleSel)
+      + "\n\n¿Lo tenés disponible? " + gracias;
     $('#lbWa').href = waOK() ? waLink(txt) : "#";
   }
 
